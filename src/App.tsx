@@ -15,7 +15,7 @@ export function App() {
   const [guess, setGuess] = useState('')
   const [discarded, setDiscarded] = useState('')
 
-  function updateKnown(idx: number, letter: string):void {
+  function updateKnown(idx: number, letter: string): void {
     if (isValidInput(letter) && letter.length <= 1) {
       const letters = known.split('')
       letters[idx] = letter || '.'
@@ -23,10 +23,10 @@ export function App() {
     }
   }
 
-  function updateGuess(letters: string):void {
+  function updateGuess(letters: string): void {
     if (isValidInput(letters)) {
       setGuess(letters)
-    } 
+    }
   }
 
   function updateDiscarded(letters: string): void {
@@ -38,13 +38,11 @@ export function App() {
   return (
     <main className='container'>
       <h1>Wordle Aid</h1>
-      <blockquote>
-        For those moments when you need extra inspiration
-      </blockquote>
+      <blockquote>For those moments when you need extra inspiration</blockquote>
       <KnownLetters handleKnownUpdate={updateKnown} />
       <GuessedLetters handleGuessedUpdate={updateGuess} />
       <DiscardedLetters handleDiscardedLetters={updateDiscarded} />
-      <Suggestions known={known} guessed={guess} discarded={discarded}/>
+      <Suggestions known={known} guessed={guess} discarded={discarded} />
     </main>
   )
 }

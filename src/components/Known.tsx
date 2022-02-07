@@ -1,5 +1,5 @@
 interface KnownLetterProps {
-  handleKnownUpdate: (idx: number, letter: string) => void,
+  handleKnownUpdate: (idx: number, letter: string) => void
 }
 
 export function KnownLetters(props: KnownLetterProps) {

@@ -1,5 +1,5 @@
 interface GuessedLetterProps {
-  handleGuessedUpdate: (letter: string) => void,
+  handleGuessedUpdate: (letter: string) => void
 }
 
 export function GuessedLetters(props: GuessedLetterProps) {
@@ -11,7 +11,7 @@ export function GuessedLetters(props: GuessedLetterProps) {
         name='guessed'
         defaultValue=''
         onChange={(ev) => props.handleGuessedUpdate(ev.target.value)}
-        />
+      />
     </section>
   )
 }

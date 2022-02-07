@@ -1,5 +1,5 @@
 interface DiscardedLetters {
-  handleDiscardedLetters: (letter: string) => void,
+  handleDiscardedLetters: (letter: string) => void
 }
 
 export function DiscardedLetters(props: DiscardedLetters) {
@@ -11,7 +11,7 @@ export function DiscardedLetters(props: DiscardedLetters) {
         name='discarded'
         defaultValue=''
         onChange={(ev) => props.handleDiscardedLetters(ev.target.value)}
-        />
+      />
     </section>
   )
 }
