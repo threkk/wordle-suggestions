@@ -1,1 +1,6 @@
-@import "../node_modules/@picocss/pico/css/pico.css";
+@import '../node_modules/@picocss/pico/css/pico.css';
+
+/* Keep columns even in small displays */
+.grid {
+  grid-template-columns: repeat(auto-fit, minmax(0%, 1fr));
+}
