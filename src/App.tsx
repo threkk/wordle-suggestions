@@ -36,14 +36,20 @@ export function App() {
   }
 
   return (
-    <main className='container'>
-      <h1>Wordle Aid</h1>
-      <blockquote>For those moments when you need extra inspiration</blockquote>
-      <KnownLetters handleKnownUpdate={updateKnown} />
-      <GuessedLetters handleGuessedUpdate={updateGuess} />
-      <DiscardedLetters handleDiscardedLetters={updateDiscarded} />
-      <Suggestions known={known} guessed={guess} discarded={discarded} />
-    </main>
+    <>
+      <header className='container'>
+        <hgroup>
+          <h1>Wordle Aid</h1>
+          <h2>For those moments when you need extra inspiration</h2>
+        </hgroup>
+      </header>
+      <main className='container'>
+        <KnownLetters handleKnownUpdate={updateKnown} />
+        <GuessedLetters handleGuessedUpdate={updateGuess} />
+        <DiscardedLetters handleDiscardedLetters={updateDiscarded} />
+        <Suggestions known={known} guessed={guess} discarded={discarded} />
+      </main>
+    </>
   )
 }
 
