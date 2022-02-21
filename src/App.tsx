@@ -39,7 +39,7 @@ export function App() {
     <>
       <header className='container'>
         <hgroup>
-          <h1>Wordle Aid</h1>
+          <h1>Wordle Suggestions</h1>
           <h2>For those moments when you need extra inspiration</h2>
         </hgroup>
       </header>
