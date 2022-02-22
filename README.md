@@ -2,7 +2,9 @@
 > For those moments when you need extra inspiration.
 
 # How to use
-The web application will provide suggestions for [Wordle](https://www.nytimes.com/games/wordle/index.html) based on the information you have from previous stages. These suggestions take into account the new word list after the acquisition from the New York Times.
+The web application will provide suggestions for [Wordle](https://www.nytimes.com/games/wordle/index.html)
+based on the information you have from previous stages. These suggestions take into account the 
+new word list after the acquisition from the New York Times.
 
 1. In the first section, marked with a 🟩, place in the correct order the
    letters that are in the word **in the correct position**. Leave empty spaces for those unknown.
@@ -25,6 +27,11 @@ npm run dev
 English is not (neither will be) my mother tongue, so sometimes I get stuck with
 rare words. I used to use a combination of `grep` and `/usr/share/dict/` to help
 me at those times, but I thought other people could also benefit.
+
+# Where are the tests?
+There aren't. This is a hobby project and writting tests is not fun. Maybe one
+day I will write some [e2e tests](https://kentcdodds.com/blog/write-tests). Feel
+free to open a pull requests if you write those.
 
 # License
 GNU GPLv3 Copyright (C) 2022  Alberto de Murga
