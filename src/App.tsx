@@ -49,6 +49,12 @@ export function App() {
         <DiscardedLetters handleDiscardedLetters={updateDiscarded} />
         <Suggestions known={known} guessed={guess} discarded={discarded} />
       </main>
+      <footer className='container-fluid'>
+        <small>
+          Built by <a href='https://threkk.com/'>threkk</a>. Source code on{' '}
+          <a href='https://github.com/threkk/wordle-suggestions'>Github</a>.
+        </small>
+      </footer>
     </>
   )
 }
