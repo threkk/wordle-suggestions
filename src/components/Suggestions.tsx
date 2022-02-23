@@ -18,22 +18,31 @@ export function Suggestions(props: SuggestionsProps) {
   let filteredWords: string[] = []
 
   if (known === '.....' && guessed === '' && discarded === '') {
-    filteredWords = []
+    return (
+      <section>
+        <div aria-busy='true'>Waiting for input...</div>
+      </section>
+    )
   } else {
     const knownRe = new RegExp(known)
-    const guessedRe = new RegExp(`[${guessed}]`)
     const discardedRe = new RegExp(`[${discarded}]`)
+
+    const guessedTest = (word: string) =>
+      guessed
+        .split('')
+        .reduce((acc, letter) => acc && word.includes(letter), true)
 
     filteredWords = words
       .filter((word) => knownRe.test(word))
-      .filter((word) => (guessed !== '' ? guessedRe.test(word) : true))
       .filter((word) => !discardedRe.test(word))
+      .filter((word) => (guessed !== '' ? guessedTest(word) : true))
   }
 
   if (filteredWords.length === 0) {
     return (
       <section>
-        <div aria-busy='true'>Waiting for input...</div>
+        <h2>Suggested words</h2>
+        No words found matching your criteria.
       </section>
     )
   }
