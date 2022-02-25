@@ -1,8 +1,9 @@
-import { useState } from 'react'
-import { DiscardedLetters } from './components/Discarded'
-import GuessedLetters from './components/Guessed'
-import KnownLetters from './components/Known'
-import Suggestions from './components/Suggestions'
+import { useEffect, useState } from 'react'
+import { useI18n } from '../i18n/context'
+import DiscardedLetters from '../components/Discarded'
+import GuessedLetters from '../components/Guessed'
+import KnownLetters from '../components/Known'
+import Suggestions from '../components/Suggestions'
 
 const IS_LETTER = /[a-zA-Z]/
 
@@ -14,6 +15,12 @@ export function App() {
   const [known, setKnown] = useState('.....')
   const [guess, setGuess] = useState('')
   const [discarded, setDiscarded] = useState('')
+  const [getText, setLang, lang] = useI18n()
+
+  useEffect(() => {
+    const [userLang] = navigator.language.split('-')
+    if (lang !== userLang) setLang(userLang)
+  })
 
   function updateKnown(idx: number, letter: string): void {
     if (isValidInput(letter) && letter.length <= 1) {
@@ -34,13 +41,15 @@ export function App() {
       setDiscarded(letters)
     }
   }
+  
+  const subtitle = getText('subtitle')
 
   return (
     <>
       <header className='container'>
         <hgroup>
           <h1>Wordle Suggestions</h1>
-          <h2>For those moments when you need extra inspiration</h2>
+          <h2>{subtitle}</h2>
         </hgroup>
       </header>
       <main className='container'>
