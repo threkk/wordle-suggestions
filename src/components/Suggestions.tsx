@@ -1,5 +1,5 @@
-import { words } from '../words'
 import { FixedSizeList as List } from 'react-window'
+import english from '../words/en'
 
 const DEFAULT_NUMBER_OF_ITEMS = 15
 
@@ -15,6 +15,8 @@ export function Suggestions(props: SuggestionsProps) {
   const lineHeight = parseInt(
     getComputedStyle(document.body).lineHeight.slice(0, -2)
   )
+
+  const words = english
   let filteredWords: string[] = []
 
   if (known === '.....' && guessed === '' && discarded === '') {

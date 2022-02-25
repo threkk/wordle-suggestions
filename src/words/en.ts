@@ -1,4 +1,4 @@
-export const words = [
+const words = [
   'aahed',
   'aalii',
   'aargh',
@@ -12947,3 +12947,5 @@ export const words = [
   'zymes',
   'zymic',
 ]
+
+export default words
