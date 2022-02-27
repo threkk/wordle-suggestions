@@ -12,6 +12,10 @@ export function KnownLetters(props: KnownLetterProps) {
           .map((_, idx: number) => (
             <input
               type='text'
+              autoComplete='off'
+              autoCorrect='off'
+              autoCapitalize='off'
+              spellCheck={false}
               maxLength={1}
               name={`known-${idx}`}
               defaultValue=''

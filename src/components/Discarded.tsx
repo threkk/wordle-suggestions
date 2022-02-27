@@ -8,6 +8,10 @@ export function DiscardedLetters(props: DiscardedLetters) {
       <h2>⬛ What you discarded</h2>
       <input
         type='text'
+        autoComplete='off'
+        autoCorrect='off'
+        autoCapitalize='off'
+        spellCheck={false}
         name='discarded'
         defaultValue=''
         onChange={(ev) => props.handleDiscardedLetters(ev.target.value)}

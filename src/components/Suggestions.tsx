@@ -10,6 +10,10 @@ interface SuggestionsProps {
   numberOfItems?: number
 }
 
+function normalise(str: string): string {
+  return str.toLowerCase().trim()
+}
+
 export function Suggestions(props: SuggestionsProps) {
   const { known, guessed, discarded, numberOfItems } = props
   const lineHeight = parseInt(
@@ -24,11 +28,11 @@ export function Suggestions(props: SuggestionsProps) {
       </section>
     )
   } else {
-    const knownRe = new RegExp(known)
-    const discardedRe = new RegExp(`[${discarded}]`)
+    const knownRe = new RegExp(normalise(known))
+    const discardedRe = new RegExp(`[${normalise(discarded)}]`)
 
     const guessedTest = (word: string) =>
-      guessed
+      normalise(guessed)
         .split('')
         .reduce((acc, letter) => acc && word.includes(letter), true)
 
