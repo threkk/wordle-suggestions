@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { useI18n } from '../i18n/context'
+import { useState } from 'react'
+import { supportedLang, useI18n } from '../i18n/context'
 import DiscardedLetters from '../components/Discarded'
 import GuessedLetters from '../components/Guessed'
 import KnownLetters from '../components/Known'
@@ -16,11 +16,6 @@ export function App() {
   const [guess, setGuess] = useState('')
   const [discarded, setDiscarded] = useState('')
   const [getText, setLang, lang] = useI18n()
-
-  useEffect(() => {
-    const [userLang] = navigator.language.split('-')
-    if (lang !== userLang) setLang(userLang)
-  })
 
   function updateKnown(idx: number, letter: string): void {
     if (isValidInput(letter) && letter.length <= 1) {
@@ -41,16 +36,30 @@ export function App() {
       setDiscarded(letters)
     }
   }
-  
+
+  function handleLang(evt: React.ChangeEvent<HTMLSelectElement>): void {
+    const value = evt.target.value
+    if (supportedLang.includes(value)) {
+      setLang(value)
+    }
+  }
+
+  const title = getText('title')
   const subtitle = getText('subtitle')
+  const createdBy = getText('createdBy')
+  const sourceCode = getText('sourceCode')
 
   return (
     <>
       <header className='container'>
         <hgroup>
-          <h1>Wordle Suggestions</h1>
+          <h1>{title}</h1>
           <h2>{subtitle}</h2>
         </hgroup>
+        <select value={lang} onChange={handleLang} style={{ width: 'auto' }}>
+          <option value='en'>🇬🇧</option>
+          <option value='es'>🇪🇸</option>
+        </select>
       </header>
       <main className='container'>
         <KnownLetters handleKnownUpdate={updateKnown} />
@@ -60,7 +69,8 @@ export function App() {
       </main>
       <footer className='container-fluid'>
         <small>
-          Built by <a href='https://threkk.com/'>threkk</a>. Source code on{' '}
+          {createdBy}{' '}
+          <a href='https://threkk.com/'>threkk</a>. {sourceCode}{' '}
           <a href='https://github.com/threkk/wordle-suggestions'>Github</a>.
         </small>
       </footer>

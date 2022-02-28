@@ -1,11 +1,17 @@
+import { useI18n } from "../i18n/context"
+
 interface KnownLetterProps {
   handleKnownUpdate: (idx: number, letter: string) => void
 }
 
 export function KnownLetters(props: KnownLetterProps) {
+  const [getText] = useI18n()
+
+  const title = getText('known')
+
   return (
     <section>
-      <h2>🟩 What you know</h2>
+      <h2>🟩 {title}</h2>
       <div className='grid'>
         {Array(5)
           .fill(null)

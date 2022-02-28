@@ -1,11 +1,17 @@
+import { useI18n } from "../i18n/context"
+
 interface DiscardedLetters {
   handleDiscardedLetters: (letter: string) => void
 }
 
 export function DiscardedLetters(props: DiscardedLetters) {
+  const [getText] = useI18n()
+
+  const title = getText('discarded')
+
   return (
     <section>
-      <h2>⬛ What you discarded</h2>
+      <h2>⬛ {title}</h2>
       <input
         type='text'
         autoComplete='off'

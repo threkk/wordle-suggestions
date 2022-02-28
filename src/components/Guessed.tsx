@@ -1,11 +1,17 @@
+import { useI18n } from "../i18n/context"
+
 interface GuessedLetterProps {
   handleGuessedUpdate: (letter: string) => void
 }
 
 export function GuessedLetters(props: GuessedLetterProps) {
+  const [getText] = useI18n()
+
+  const title = getText('guessed')
+
   return (
     <section>
-      <h2>🟨 What you guessed</h2>
+      <h2>🟨 {title}</h2>
       <input
         type='text'
         autoComplete='off'

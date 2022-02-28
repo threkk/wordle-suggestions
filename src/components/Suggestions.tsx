@@ -1,5 +1,5 @@
 import { FixedSizeList as List } from 'react-window'
-import english from '../words/en'
+import { useI18n } from '../i18n/context'
 
 const DEFAULT_NUMBER_OF_ITEMS = 15
 
@@ -15,18 +15,20 @@ function normalise(str: string): string {
 }
 
 export function Suggestions(props: SuggestionsProps) {
+  const [getText, , , words] = useI18n()
+
   const { known, guessed, discarded, numberOfItems } = props
   const lineHeight = parseInt(
     getComputedStyle(document.body).lineHeight.slice(0, -2)
   )
 
-  const words = english
   let filteredWords: string[] = []
 
   if (known === '.....' && guessed === '' && discarded === '') {
+    const waiting = getText('waiting')
     return (
       <section>
-        <div aria-busy='true'>Waiting for input...</div>
+        <div aria-busy='true'>{waiting}</div>
       </section>
     )
   } else {
@@ -44,18 +46,21 @@ export function Suggestions(props: SuggestionsProps) {
       .filter((word) => (guessed !== '' ? guessedTest(word) : true))
   }
 
+  const suggested = getText('suggested')
+  const notFound = getText('notFound')
+
   if (filteredWords.length === 0) {
     return (
       <section>
-        <h2>Suggested words</h2>
-        No words found matching your criteria.
+        <h2>{suggested}</h2>
+        {notFound}
       </section>
     )
   }
 
   return (
     <section>
-      <h2>Suggested words</h2>
+      <h2>{suggested}</h2>
       <List
         height={(numberOfItems ?? DEFAULT_NUMBER_OF_ITEMS) * lineHeight}
         width={'100%'}
