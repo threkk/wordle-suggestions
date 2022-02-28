@@ -15,6 +15,9 @@ new word list after the acquisition from the New York Times.
 
 The suggested words in the list could be the chosen word.
 
+## También en español  
+La aplicación también soporta la version en español de [Wordle](https://wordle.danielfrg.com/).
+
 # Getting started
 ```
 git clone git@github.com:threkk/prune.js.git
