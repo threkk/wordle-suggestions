@@ -25,7 +25,7 @@ export function Suggestions(props: SuggestionsProps) {
   let filteredWords: string[] = []
 
   // Initial state, nothing known
-  if (known === '.....' && guessed === '' && discarded === '') {
+  if (known === '.....' && guessed === '----' && discarded === '') {
     const waiting = getText('waiting')
     return (
       <section>
