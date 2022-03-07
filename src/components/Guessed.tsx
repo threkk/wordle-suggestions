@@ -1,7 +1,7 @@
-import { useI18n } from "../i18n/context"
+import { useI18n } from '../i18n/context'
 
 interface GuessedLetterProps {
-  handleGuessedUpdate: (letter: string) => void
+  handleGuessedUpdate: (idx: number, letter: string) => void
 }
 
 export function GuessedLetters(props: GuessedLetterProps) {
@@ -12,16 +12,23 @@ export function GuessedLetters(props: GuessedLetterProps) {
   return (
     <section>
       <h2>🟨 {title}</h2>
-      <input
-        type='text'
-        autoComplete='off'
-        autoCorrect='off'
-        autoCapitalize='off'
-        spellCheck={false}
-        name='guessed'
-        defaultValue=''
-        onChange={(ev) => props.handleGuessedUpdate(ev.target.value)}
-      />
+      <div className='grid'>
+        {Array(5)
+          .fill(null)
+          .map((_, idx: number) => (
+            <input
+              type='text'
+              autoComplete='off'
+              autoCorrect='off'
+              autoCapitalize='off'
+              spellCheck={false}
+              name='guessed'
+              defaultValue=''
+              key={idx}
+              onChange={(ev) => props.handleGuessedUpdate(idx, ev.target.value)}
+            />
+          ))}
+      </div>
     </section>
   )
 }

@@ -10,8 +10,8 @@ interface SuggestionsProps {
   numberOfItems?: number
 }
 
-function normalise(str: string): string {
-  return str.toLowerCase().trim()
+function uniqueChars(word: string): string {
+  return [...new Set(word.split(''))].join('')
 }
 
 export function Suggestions(props: SuggestionsProps) {
@@ -24,6 +24,7 @@ export function Suggestions(props: SuggestionsProps) {
 
   let filteredWords: string[] = []
 
+  // Initial state, nothing known
   if (known === '.....' && guessed === '' && discarded === '') {
     const waiting = getText('waiting')
     return (
@@ -32,18 +33,34 @@ export function Suggestions(props: SuggestionsProps) {
       </section>
     )
   } else {
-    const knownRe = new RegExp(normalise(known))
-    const discardedRe = new RegExp(`[${normalise(discarded)}]`)
+    const knownRe = new RegExp(known)
+    const discardedRe = new RegExp(`[${discarded}]`)
+    const discardedPerCellRe = new RegExp(
+      guessed
+        .split('-')
+        .map((cell) => (cell.length > 0 ? `[^${uniqueChars(cell)}]` : '.'))
+        .join('')
+    )
 
-    const guessedTest = (word: string) =>
-      normalise(guessed)
-        .split('')
-        .reduce((acc, letter) => acc && word.includes(letter), true)
+    const allGuessedLetters = (word: string) => {
+      // Remove the cell separator and split the characters
+      const letters = guessed.replaceAll('-', '').split('')
+      // Remove duplicates to sped up the reduce
+      return [...new Set(letters)].reduce(
+        (acc, letter) => acc && word.includes(letter),
+        true
+      )
+    }
 
     filteredWords = words
+      // We know these letters are in these positions.
       .filter((word) => knownRe.test(word))
+      // We know ALL these letters are not in the word.
       .filter((word) => !discardedRe.test(word))
-      .filter((word) => (guessed !== '' ? guessedTest(word) : true))
+      // We know ALL these letters are part of the word.
+      .filter((word) => (guessed !== '' ? allGuessedLetters(word) : true))
+      // We know these letters are not in those concrete places.
+      .filter((word) => discardedPerCellRe.test(word))
   }
 
   const suggested = getText('suggested')

@@ -1,4 +1,4 @@
-const texts: Readonly<{ [key:string]: string }> = {
+const texts: Readonly<{ [key: string]: string }> = {
   title: 'Wordle Suggestions',
   subtitle: 'Para esos momentos donde necesitas un poco de inspiración.',
   createdBy: 'Creado por',

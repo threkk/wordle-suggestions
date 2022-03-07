@@ -8,8 +8,9 @@ new word list after the acquisition from the New York Times.
 
 1. In the first section, marked with a 🟩, place in the correct order the
    letters that are in the word **in the correct position**. Leave empty spaces for those unknown.
-2. In the second section, marked with a 🟨, write the letters that are in the
-   word with an **unknown position**.
+2. In the second section, marked with a 🟨, place in the correct order the
+   letters that are **not in the correct position but in the word**. Leave empty
+   spaces for the unknown.
 3. In the third section, marked with a ⬛, write the letters that are **not** in
    the word.
 

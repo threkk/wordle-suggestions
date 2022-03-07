@@ -1,4 +1,4 @@
-import { useI18n } from "../i18n/context"
+import { useI18n } from '../i18n/context'
 
 interface KnownLetterProps {
   handleKnownUpdate: (idx: number, letter: string) => void

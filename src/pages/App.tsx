@@ -5,35 +5,41 @@ import GuessedLetters from '../components/Guessed'
 import KnownLetters from '../components/Known'
 import Suggestions from '../components/Suggestions'
 
-const IS_LETTER = /[a-zA-Z]/
+const IS_NOT_LETTER = /[^a-zA-Z]/
 
 function isValidInput(input: string): boolean {
-  return input.length === 0 || IS_LETTER.test(input)
+  return input.length === 0 || !IS_NOT_LETTER.test(input)
+}
+
+function normalise(str: string): string {
+  return str.toLowerCase().trim().replaceAll(/\W/g, '')
 }
 
 export function App() {
   const [known, setKnown] = useState('.....')
-  const [guess, setGuess] = useState('')
+  const [guess, setGuess] = useState('----')
   const [discarded, setDiscarded] = useState('')
   const [getText, setLang, lang] = useI18n()
 
   function updateKnown(idx: number, letter: string): void {
     if (isValidInput(letter) && letter.length <= 1) {
       const letters = known.split('')
-      letters[idx] = letter || '.'
+      letters[idx] = normalise(letter) || '.'
       setKnown(letters.join(''))
     }
   }
 
-  function updateGuess(letters: string): void {
+  function updateGuess(idx: number, letters: string): void {
     if (isValidInput(letters)) {
-      setGuess(letters)
+      const fields = guess.split('-')
+      fields[idx] = normalise(letters)
+      setGuess(fields.join('-'))
     }
   }
 
   function updateDiscarded(letters: string): void {
     if (isValidInput(letters)) {
-      setDiscarded(letters)
+      setDiscarded(normalise(letters))
     }
   }
 
@@ -49,6 +55,11 @@ export function App() {
   const createdBy = getText('createdBy')
   const sourceCode = getText('sourceCode')
 
+  // Normally we would need to debounce the inputs but we don't need it because:
+  // a) We don't make remote queries.
+  // b) We are pretty much ok with overwritting the existing content.
+  //
+  // We might still want to debounce for avoiding re-renders
   return (
     <>
       <header className='container'>
@@ -69,8 +80,7 @@ export function App() {
       </main>
       <footer className='container-fluid'>
         <small>
-          {createdBy}{' '}
-          <a href='https://threkk.com/'>threkk</a>. {sourceCode}{' '}
+          {createdBy} <a href='https://threkk.com/'>threkk</a>. {sourceCode}{' '}
           <a href='https://github.com/threkk/wordle-suggestions'>Github</a>.
         </small>
       </footer>

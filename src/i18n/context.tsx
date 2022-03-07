@@ -12,7 +12,9 @@ const DEFAULT_LANG = EN
 
 const supportedLang = [EN, ES]
 
-const TEXT: { [K in typeof supportedLang[number]]: Readonly<{ [key: string]: string }> } = {
+const TEXT: {
+  [K in typeof supportedLang[number]]: Readonly<{ [key: string]: string }>
+} = {
   [EN]: enTranslations,
   [ES]: esTranslations,
 }
